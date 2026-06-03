@@ -1471,6 +1471,15 @@ int imx95_xpcs_phy_sgmii_1g_config(struct udevice *dev)
 	return 0;
 }
 
+int xpcs_phy_sgmii_1g_config(struct udevice *dev)
+{
+	if (is_imx95())
+		return imx95_xpcs_phy_sgmii_1g_config(dev);
+
+	dev_dbg(dev, "SGMII 1G config skipped\n");
+	return -ENODEV;
+}
+
 u32 xpcs_phy_get_id(struct udevice *dev)
 {
 	int ret;
